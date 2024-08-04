@@ -8,6 +8,8 @@
 
     @livewireStyles
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    {{-- <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.x.x/dist/alpine.min.js" defer></script> --}}
 </head>
 
 <body class="font-sans text-base leading-normal tracking-normal text-gray-800">
