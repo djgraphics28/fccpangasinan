@@ -38,7 +38,7 @@ class Register extends Component
 
         session()->flash('message', 'Registration successful.');
 
-        return redirect()->route('dashboard'); // Change 'dashboard' to the route you want to redirect to
+        return redirect()->route('pre-registration'); // Change 'dashboard' to the route you want to redirect to
     }
 
     public function render()
