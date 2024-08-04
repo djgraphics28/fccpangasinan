@@ -17,7 +17,7 @@
                             @enderror
                         </div>
                         <div class="w-full sm:w-1/3">
-                            <label for="middle_name" class="block text-sm font-medium text-gray-700">Middle Name (Optional)</label>
+                            <label for="middle_name" class="block text-sm font-medium text-gray-700">Middle Name</label>
                             <input type="text" id="middle_name" wire:model="middle_name"
                                 class="mt-1 p-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                             @error('middle_name')
