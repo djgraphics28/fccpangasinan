@@ -47,6 +47,7 @@ class PreRegistration extends Component
                 'last_name' => $this->last_name,
                 'gender' => $this->gender,
                 'church_id' => Auth::user()->church_id,
+                'user_id' => Auth::user()->id,
             ]
         );
 
