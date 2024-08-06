@@ -20,7 +20,7 @@
                     </div>
                     <div class="mb-4 mt-2">
                         <label for="password" class="block text-gray-700 font-bold mb-2">Password</label>
-                        <input placeholder="Passwword" type="password" wire:model="password" id="password"
+                        <input placeholder="Password" type="password" wire:model="password" id="password"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         @error('password')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
