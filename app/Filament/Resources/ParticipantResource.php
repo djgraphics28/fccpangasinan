@@ -19,16 +19,6 @@ class ParticipantResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-
-    /**
-     * Get the navigation badge for the resource.
-     */
-    public static function getNavigationBadge(): ?string
-    {
-        return number_format(static::getModel()::count());
-    }
-
-
     public static function form(Form $form): Form
     {
         return $form
@@ -43,15 +33,14 @@ class ParticipantResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('sufix')
                     ->maxLength(255),
-                Forms\Components\Select::make('gender')
-                    ->required()
-                    ->options([
-                        'Male' => 'Male',
-                        'Female' => 'Female',
-                    ]),
+                Forms\Components\TextInput::make('gender')
+                    ->required(),
                 Forms\Components\Select::make('church_id')
                     ->relationship('church', 'name')
                     ->required(),
+                Forms\Components\TextInput::make('user_id')
+                    ->required()
+                    ->numeric(),
             ]);
     }
 
@@ -71,6 +60,9 @@ class ParticipantResource extends Resource
                 Tables\Columns\TextColumn::make('church.name')
                     ->numeric()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('user_id')
+                    ->numeric()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -85,7 +77,6 @@ class ParticipantResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -94,10 +85,19 @@ class ParticipantResource extends Resource
             ]);
     }
 
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageParticipants::route('/'),
+            'index' => Pages\ListParticipants::route('/'),
+            'create' => Pages\CreateParticipant::route('/create'),
+            'edit' => Pages\EditParticipant::route('/{record}/edit'),
         ];
     }
 }

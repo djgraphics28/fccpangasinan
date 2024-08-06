@@ -2,13 +2,12 @@
 
 namespace App\Filament\Resources\ParticipantResource\Pages;
 
-
-use App\Filament\Resources\ParticipantResource\Widgets;
 use App\Filament\Resources\ParticipantResource;
+use App\Filament\Resources\ParticipantResource\Widgets;
 use Filament\Actions;
-use Filament\Resources\Pages\ManageRecords;
+use Filament\Resources\Pages\ListRecords;
 
-class ManageParticipants extends ManageRecords
+class ListParticipants extends ListRecords
 {
     protected static string $resource = ParticipantResource::class;
 
@@ -19,8 +18,7 @@ class ManageParticipants extends ManageRecords
         ];
     }
 
-
-     /**
+      /**
      * The header widgets.
      */
     protected function getHeaderWidgets(): array
