@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\ParticipantResource\Pages;
 
+
+use App\Filament\Resources\ParticipantResource\Widgets;
 use App\Filament\Resources\ParticipantResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
@@ -14,6 +16,17 @@ class ManageParticipants extends ManageRecords
     {
         return [
             Actions\CreateAction::make(),
+        ];
+    }
+
+
+     /**
+     * The header widgets.
+     */
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            Widgets\ChurchParticipantCountOverview::class,
         ];
     }
 }
