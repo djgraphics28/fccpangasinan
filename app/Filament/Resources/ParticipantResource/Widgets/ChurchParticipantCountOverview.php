@@ -10,12 +10,17 @@ class ChurchParticipantCountOverview extends BaseWidget
 {
     protected function getStats(): array
     {
-        $churches = Church::all();
+        $churches = Church::all()->count();
 
-        foreach ($churches as $church) {
-            $stats[] = Stat::make($church->name, $church->participants()->count())->icon('heroicon-o-users');
-        }
+        // foreach ($churches as $church) {
+        //     $stats[] = Stat::make($church->name, $church->participants()->count())->icon('heroicon-o-users');
+        // }
 
-        return $stats;
+        return [
+            Stat::make('Total Requests', $churches)
+                // ->description('The total number of Requests')
+                ->icon('heroicon-o-users')
+
+        ];
     }
 }
