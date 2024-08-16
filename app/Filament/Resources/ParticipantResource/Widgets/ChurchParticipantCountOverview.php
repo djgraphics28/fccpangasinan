@@ -19,9 +19,9 @@ class ChurchParticipantCountOverview extends BaseWidget
         $basista = Participant::where('church_id', 5)->count();
         $labrador = Participant::where('church_id', 6)->count();
         $mabini = Participant::where('church_id', 7)->count();
-        $alcalaApartado = Participant::where('church_id', 8)->count();
-        $alcalaAnulid = Participant::where('church_id', 9)->count();
-        $alcalaBokil = Participant::where('church_id', 10)->count();
+        $alcala = Participant::where('church_id', 8)->count();
+        // $alcalaAnulid = Participant::where('church_id', 9)->count();
+        // $alcalaBokil = Participant::where('church_id', 10)->count();
 
         return [
             Stat::make('All', $all)->icon('heroicon-o-users'),
@@ -32,9 +32,9 @@ class ChurchParticipantCountOverview extends BaseWidget
             Stat::make('FCC Basista', $basista)->icon('heroicon-o-users'),
             Stat::make('FCC Labrador', $labrador)->icon('heroicon-o-users'),
             Stat::make('FCC Mabini', $mabini)->icon('heroicon-o-users'),
-            Stat::make('FCC Alcala (Apartado)', $alcalaApartado)->icon('heroicon-o-users'),
-            Stat::make('FCC Alcala (Anulid)', $alcalaAnulid)->icon('heroicon-o-users'),
-            Stat::make('FCC Alcala (Bokil)', $alcalaBokil)->icon('heroicon-o-users'),
+            Stat::make('FCC Alcala', $alcala)->icon('heroicon-o-users'),
+            // Stat::make('FCC Alcala (Anulid)', $alcalaAnulid)->icon('heroicon-o-users'),
+            // Stat::make('FCC Alcala (Bokil)', $alcalaBokil)->icon('heroicon-o-users'),
         ];
     }
 }
