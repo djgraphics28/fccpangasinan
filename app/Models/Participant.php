@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Participant extends Model
 {
@@ -20,5 +21,10 @@ class Participant extends Model
     public function church(): BelongsTo
     {
         return $this->belongsTo(Church::class, 'church_id', 'id');
+    }
+
+    public function groups(): BelongsToMany
+    {
+        return $this->belongsToMany(Group::class, 'participant_group');
     }
 }

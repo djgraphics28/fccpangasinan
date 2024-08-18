@@ -43,6 +43,7 @@ class ParticipantResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('gender')
                     ->required(),
+                Forms\Components\Toggle::make('is_facilitator'),
                 Forms\Components\Select::make('church_id')
                     ->relationship('church', 'name')
                     ->required(),
@@ -65,6 +66,8 @@ class ParticipantResource extends Resource
                 Tables\Columns\TextColumn::make('sufix')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('gender'),
+                Tables\Columns\IconColumn::make('is_facilitator')
+                    ->boolean(),
                 Tables\Columns\TextColumn::make('church.name')
                     ->numeric()
                     ->sortable(),
