@@ -39,15 +39,20 @@ class AssignGroupToParticipant extends Command
         }
 
         foreach ($participants as $participant) {
-            $randomGroup = $groups->random();
+            foreach($groups as $group) {
+                $participant->groups()->attach($group->id);
 
-            // Attach the random group to the participant if not already assigned
-            if (!$participant->groups->contains($randomGroup->id)) {
-                $participant->groups()->attach($randomGroup->id);
-                $this->info("Assigned Group ID {$randomGroup->id} to Participant ID {$participant->id}.");
-            } else {
-                $this->info("Participant ID {$participant->id} is already assigned to Group ID {$randomGroup->id}.");
+                $this->info("Participant ID {$participant->id} is already assigned to Group ID {$group->id}.");
             }
+            // $randomGroup = $groups->random();
+
+            // // Attach the random group to the participant if not already assigned
+            // if (!$participant->groups->contains($randomGroup->id)) {
+            //     $participant->groups()->attach($randomGroup->id);
+            //     $this->info("Assigned Group ID {$randomGroup->id} to Participant ID {$participant->id}.");
+            // } else {
+            //     $this->info("Participant ID {$participant->id} is already assigned to Group ID {$randomGroup->id}.");
+            // }
         }
 
         $this->info('Random assignment completed successfully.');
