@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Group;
 use App\Models\Participant;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 class AssignGroupToParticipant extends Command
 {
@@ -27,6 +28,8 @@ class AssignGroupToParticipant extends Command
      */
     public function handle()
     {
+        DB::table('participant_group')->truncate();
+
         $participants = Participant::where('is_facilitator', false)->orderBy('church_id','ASC')->get();
         $groups = Group::all();
 
