@@ -26,11 +26,36 @@ class AssignGroupToParticipant extends Command
     /**
      * Execute the console command.
      */
+    // public function handle()
+    // {
+    //     DB::table('participant_group')->truncate();
+
+    //     $participants = Participant::where('is_facilitator', false)->orderBy('church_id','ASC')->get();
+    //     $groups = Group::all();
+
+    //     if ($participants->isEmpty() || $groups->isEmpty()) {
+    //         $this->error('No participants or groups found.');
+    //         return;
+    //     }
+    //     foreach($groups as $group) {
+    //     foreach ($participants as $participant) {
+
+    //             $participant->groups()->attach($group->id);
+
+    //             $this->info("Participant ID {$participant->id} is already assigned to Group ID {$group->id}.");
+    //         }
+    //     }
+
+    //     $this->info('Group assignment completed successfully.');
+    // }
+
     public function handle()
     {
         DB::table('participant_group')->truncate();
 
-        $participants = Participant::where('is_facilitator', false)->orderBy('church_id','ASC')->get();
+        $participants = Participant::where('is_facilitator', false)
+            ->orderBy('church_id', 'ASC')
+            ->get();
         $groups = Group::all();
 
         if ($participants->isEmpty() || $groups->isEmpty()) {
@@ -38,23 +63,18 @@ class AssignGroupToParticipant extends Command
             return;
         }
 
-        foreach ($participants as $participant) {
-            foreach($groups as $group) {
-                $participant->groups()->attach($group->id);
-
-                $this->info("Participant ID {$participant->id} is already assigned to Group ID {$group->id}.");
-            }
-            // $randomGroup = $groups->random();
-
-            // // Attach the random group to the participant if not already assigned
-            // if (!$participant->groups->contains($randomGroup->id)) {
-            //     $participant->groups()->attach($randomGroup->id);
-            //     $this->info("Assigned Group ID {$randomGroup->id} to Participant ID {$participant->id}.");
-            // } else {
-            //     $this->info("Participant ID {$participant->id} is already assigned to Group ID {$randomGroup->id}.");
-            // }
+        if ($participants->count() > $groups->count()) {
+            $this->error('There are more participants than groups. Cannot assign each participant to a unique group.');
+            return;
         }
 
-        $this->info('Random assignment completed successfully.');
+        foreach ($participants as $index => $participant) {
+            $group = $groups[$index % $groups->count()];
+            $participant->groups()->attach($group->id);
+            $this->info("Participant ID {$participant->id} is assigned to Group ID {$group->id}.");
+        }
+
+        $this->info('Group assignment completed successfully.');
     }
+
 }
