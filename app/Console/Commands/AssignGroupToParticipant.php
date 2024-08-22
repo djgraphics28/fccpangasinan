@@ -27,7 +27,7 @@ class AssignGroupToParticipant extends Command
      */
     public function handle()
     {
-        $participants = Participant::where('is_facilitator', false)->get();
+        $participants = Participant::where('is_facilitator', false)->orderBy('church_id','ASC')->get();
         $groups = Group::all();
 
         if ($participants->isEmpty() || $groups->isEmpty()) {
