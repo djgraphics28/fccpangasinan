@@ -37,23 +37,24 @@ class PreRegistration extends Component
 
     public function register()
     {
-        $this->validate();
+        $this->alert('error', 'Pre-Registration has been turned off.');
+        // $this->validate();
 
-        Participant::updateOrCreate(
-            ['id' => $this->participant_id],
-            [
-                'first_name' => $this->first_name,
-                'middle_name' => $this->middle_name,
-                'last_name' => $this->last_name,
-                'gender' => $this->gender,
-                'church_id' => Auth::user()->church_id,
-                'user_id' => Auth::user()->id,
-            ]
-        );
+        // Participant::updateOrCreate(
+        //     ['id' => $this->participant_id],
+        //     [
+        //         'first_name' => $this->first_name,
+        //         'middle_name' => $this->middle_name,
+        //         'last_name' => $this->last_name,
+        //         'gender' => $this->gender,
+        //         'church_id' => Auth::user()->church_id,
+        //         'user_id' => Auth::user()->id,
+        //     ]
+        // );
 
-        $this->alert('success', 'Participant saved successfully.');
-        // session()->flash('message', 'Participant registered successfully.');
-        $this->reset();
+        // $this->alert('success', 'Participant saved successfully.');
+        // // session()->flash('message', 'Participant registered successfully.');
+        // $this->reset();
         // $this->closeModal();
     }
 
@@ -95,11 +96,12 @@ class PreRegistration extends Component
 
     public function delete($id)
     {
-        $participant = Participant::find($id);
-        if ($participant) {
-            $participant->delete();
-            $this->alert('success', 'Participant deleted successfully.');
-        }
+        $this->alert('error', 'Pre-registration has been turned off.');
+        // $participant = Participant::find($id);
+        // if ($participant) {
+        //     $participant->delete();
+        //     $this->alert('success', 'Participant deleted successfully.');
+        // }
     }
 
 }
