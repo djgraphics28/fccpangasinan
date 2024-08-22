@@ -63,18 +63,16 @@ class AssignGroupToParticipant extends Command
             return;
         }
 
-        if ($participants->count() > $groups->count()) {
-            $this->error('There are more participants than groups. Cannot assign each participant to a unique group.');
-            return;
-        }
-
+        $groupCount = $groups->count();
         foreach ($participants as $index => $participant) {
-            $group = $groups[$index % $groups->count()];
+            // Assign each participant to a group based on their index
+            $group = $groups[$index % $groupCount];
             $participant->groups()->attach($group->id);
             $this->info("Participant ID {$participant->id} is assigned to Group ID {$group->id}.");
         }
 
         $this->info('Group assignment completed successfully.');
     }
+
 
 }
